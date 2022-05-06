@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails d'article</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <th scope="row">GUID</th>
+                    <td th:utext="${item.guid}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Title</th>
+                    <td th:utext="${item.guid}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Date</th>
+                    <td th:utext="${item.published}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Categorie</th>
+                    <td th:utext="${item.category}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Contenu</th>
+                    <td th:utext="${item.content}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div>
+        <a th:href="@{/rss22/delete/{guid}(guid=${item.guid})}">Supprimer</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Liste des articles</title>
+    </head>
+    <body>
+        <div>
+            <form th:action="@{/rss22/insert}" method="POST">
+                <textarea name="xml" cols="30" rows="10"></textarea>
+                <input type="reset" value="Reset">
+                <input type="submit" value="Add">
+            </form>
+        </div>
+        <div>
+            <form th:action="@{/search}" method="get">
+                <input type="text" name="title">
+                <input type="reset" value="Reset">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">GUID</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">published</th>
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${items}">
+                        <td th:utext="${item.guid}"></td>
+                        <td th:utext="${item.title}"></td>
+                        <td th:utext="${item.published}"></td>
+                        <td><a th:href="@{/rss22/html/{guid}(guid=${item.guid})}">afficher</a></td>
+                        <td><a th:href="@{/rss22/delete/{guid}(guid=${item.guid})}">supprimer</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
