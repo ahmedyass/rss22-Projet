@@ -88,14 +88,12 @@ public class Article {
 	
 	public Article() {}
 	
-	public Article(Long guid, String title, String published, String category, String image, String content,
-			Set<Auteur> autors) {
+	public Article(Long guid, String title, String published, String category, String content, Set<Auteur> autors) {
 		super();
 		this.guid = guid;
 		this.title = title;
 		this.published = published;
 		this.category = category;
-		this.image = image;
 		this.content = content;
 		this.autors = autors;
 	}
@@ -114,14 +112,6 @@ public class Article {
 	
 	public void setCategory(String category) {
 		this.category = category;
-	}
-	
-	public String getImage() {
-		return image;
-	}
-	
-	public void setImage(String image) {
-		this.image = image;
 	}
 	
 	public String getContent() {
