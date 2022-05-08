@@ -14,11 +14,13 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import fr.univrouen.rss22Project.Models.Feed;
 import fr.univrouen.rss22Project.Repositories.FeedRepository;
 
+@Service
 public class FeedServiceImpl implements FeedService{
 	
 	@Autowired

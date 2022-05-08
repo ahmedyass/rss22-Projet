@@ -42,6 +42,20 @@ public class Feed {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Article> items;
 	
+	public Feed() {
+		
+	}
+	
+	public Feed(long id, String title, String pubDate, String copyright, String link, Set<Article> items) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.pubDate = pubDate;
+		this.copyright = copyright;
+		this.link = link;
+		this.items = items;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -89,19 +103,4 @@ public class Feed {
 	public void setItems(Set<Article> items) {
 		this.items = items;
 	}
-	
-	public Feed(long id, String title, String pubDate, String copyright, String link, Set<Article> items) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.pubDate = pubDate;
-		this.copyright = copyright;
-		this.link = link;
-		this.items = items;
-	}
-	
-	public Feed() {
-	}
-	
-
 }

@@ -1,8 +1,6 @@
 package fr.univrouen.rss22Project.Models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,9 +16,8 @@ import javax.xml.bind.annotation.XmlElement;
 public class Auteur {
 	
 	@Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	@XmlAttribute
-	private Long id;
+	private long id;
 	
 	@XmlElement
 	private String name;
@@ -38,7 +35,7 @@ public class Auteur {
 	public Auteur() {
 		
 	}
-	public Auteur(Long id, String name, String email, String uri) {
+	public Auteur(long id, String name, String email, String uri) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -48,7 +45,7 @@ public class Auteur {
 	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {

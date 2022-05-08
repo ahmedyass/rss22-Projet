@@ -4,8 +4,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,9 +23,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 public class Article {
 	
 	@Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
 	@XmlAttribute
-	private Long guid;
+	private long guid;
 	
 	@XmlElement
 	private String title;
@@ -37,9 +34,6 @@ public class Article {
 	
 	@XmlElement
 	private String category;
-	
-	@XmlElement
-	private String image;
 	
 	@XmlElement
 	private String content;
@@ -53,12 +47,16 @@ public class Article {
     @JoinColumn(name = "feed_id")
     Feed feed;
 	
-	public Feed getFeed() {
-		return feed;
-	}
+	public Article() {}
 	
-	public void setFeed(Feed feed) {
-		this.feed = feed;
+	public Article(long guid, String title, String published, String category, String content, Set<Auteur> autors) {
+		super();
+		this.guid = guid;
+		this.title = title;
+		this.published = published;
+		this.category = category;
+		this.content = content;
+		this.autors = autors;
 	}
 	
 	public long getGuid() {
@@ -86,18 +84,6 @@ public class Article {
 		this.autors = autors;
 	}
 	
-	public Article() {}
-	
-	public Article(Long guid, String title, String published, String category, String content, Set<Auteur> autors) {
-		super();
-		this.guid = guid;
-		this.title = title;
-		this.published = published;
-		this.category = category;
-		this.content = content;
-		this.autors = autors;
-	}
-	
 	public String getPublished() {
 		return published;
 	}
@@ -122,9 +108,17 @@ public class Article {
 		this.content = content;
 	}
 	
+	public Feed getFeed() {
+		return feed;
+	}
+	
+	public void setFeed(Feed feed) {
+		this.feed = feed;
+	}
+	
 	@Override
 	public String toString() {
-		return ("Article : " + title + "\n(" + guid + ") Le = " + published );
+		return ("Article : " + title + "\n" + guid + " Le = " + published );
 	}
 }
 
