@@ -8,8 +8,8 @@
     </head>
     <body>
         <div>
-            <form th:action="@{/rss22/insert}" method="POST">
-                <textarea name="xml" cols="30" rows="10"></textarea>
+            <form th:action="@{/rss22/insert}" method="POST" action="#" th:object="${feed}>
+                <textarea th:field="*{xml}" cols="30" rows="10"></textarea>
                 <input type="reset" value="Reset">
                 <input type="submit" value="Add">
             </form>

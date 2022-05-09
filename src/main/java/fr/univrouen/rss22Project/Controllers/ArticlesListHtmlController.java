@@ -24,6 +24,8 @@ public class ArticlesListHtmlController {
 	@GetMapping(value = "/resume/html", produces = MediaType.APPLICATION_XML_VALUE)
 	public @ResponseBody String getArticlesList(Model model) {
 		model.addAttribute("items", articleService.findAll());
+		String feed = "";
+		model.addAttribute("feed", feed);
         return "ListeArticle";
 	}
 	

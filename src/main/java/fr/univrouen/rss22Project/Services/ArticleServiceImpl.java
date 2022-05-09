@@ -21,11 +21,15 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public Optional<Article> findById(Long id) {
-		
-		Optional<Article> articleFound = articleRepository.findById(id);
-        
-		return articleFound;
+	public Article findById(long guid) {
+		Optional<Article> optional = articleRepository.findById(guid);
+		Article article = null;
+		if (optional.isPresent()) {
+			article = optional.get();
+		} else {
+            throw new RuntimeException(" Article not found for id :: " + guid);
+        }
+		return article;
 	}
 	
 	@Override
@@ -44,8 +48,8 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public void deleteById(Long id) {
-		this.articleRepository.deleteById(id);
+	public void deleteById(long guid) {
+		this.articleRepository.deleteById(guid);
 	}
 
 }
