@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.xml.sax.SAXException;
 
 import fr.univrouen.rss22Project.Models.Article;
+import fr.univrouen.rss22Project.Models.Feed;
 import fr.univrouen.rss22Project.Services.ArticleServiceImpl;
 import fr.univrouen.rss22Project.Services.AuteurServiceImpl;
 import fr.univrouen.rss22Project.Services.FeedServiceImpl;
@@ -27,8 +28,10 @@ public class AddArticleController {
 	@PostMapping(value = "/rss22/insert", produces = MediaType.APPLICATION_XML_VALUE)
 	public String createarticle(@RequestBody String feed) throws JAXBException, SAXException, IOException {
 		if( feedService.validateXMLSchema(feed) == true) {
-			feedService.save(feedService.convertXML(feed));
+			Feed _feed = feedService.convertXML(feed);
+			feedService.save(_feed);
 			List<Article> articles = new ArrayList<>(feedService.convertXML(feed).getItems());
+			articles.forEach(article -> article.setFeed(_feed));
 			articleService.saveMultiple(articles);
 			articles.forEach(article -> auteurService.saveMultiple(new ArrayList<>(article.getAutors()))); 
 			return "redirect:/rss22/resume/html";

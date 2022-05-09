@@ -1,5 +1,6 @@
 package fr.univrouen.rss22Project.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,14 @@ public class AuteurServiceImpl implements AuteurService {
 	
 	@Override
 	public void saveMultiple(List<Auteur> auteurs) {
-		this.auteurRepository.saveAll(auteurs);
+		List<Auteur> authors = new ArrayList<>();
+		auteurs.forEach(
+				auteur -> {
+					if(this.auteurRepository.findAuteurByEmail(auteur.getEmail()) == null) {
+						authors.add(auteur);
+					}
+				});
+		this.auteurRepository.saveAll(authors);
 	}
 
 }

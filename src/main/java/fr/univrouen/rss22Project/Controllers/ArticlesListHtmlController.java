@@ -1,6 +1,5 @@
 package fr.univrouen.rss22Project.Controllers;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +28,7 @@ public class ArticlesListHtmlController {
 	}
 	
 	@GetMapping(value="/html/{guid}", produces = MediaType.APPLICATION_XML_VALUE)
-	public String getItemHtml(@PathVariable("guid") Long guid, Model model) {
+	public String getItemHtml(@PathVariable("guid") long guid, Model model) {
 	    Optional<Article> article = articleService.findById(guid);
 	    model.addAttribute("item", article);
 	    return "ArticleDetails";

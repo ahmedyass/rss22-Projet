@@ -7,5 +7,6 @@ import fr.univrouen.rss22Project.Models.Auteur;
 
 @Repository
 public interface AuteurRepository extends JpaRepository<Auteur, Long>  {
+	public Auteur findAuteurByEmail(String email);
 
 }
