@@ -35,7 +35,7 @@
     <main class="container my-md-4">
         <div>
             <form class="form-floating" method="POST" action="#" th:action="@{/rss22/insert}" th:object="${feed}">
-                <textarea class="form-control mb-2" th:field="*{feed}" cid="text"> </textarea>
+                <textarea class="form-control mb-2" th:field="*{feed}" id="text"> </textarea>
                 <label for="text">Entrer un code XML valide</label>
                 <button type="submit" class="btn btn-primary p-2">Ajouter</button>
                 <button type="reset" class="btn btn-primary p-2">Reset</button>
