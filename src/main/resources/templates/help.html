@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstdap@5.1.3/dist/css/bootstdap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Information</title>
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="../static/logo.svg" th:src="@{logo.svg}" alt="logo" class="d-inline-block align-text-top">
+            </a>
+            <div class="collapse navbar-collapse align-right">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/help}">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/rss22/resume/html}">Liste articles</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar -->
+    <!-- content -->
+    <main class="container my-md-4">
+        <div>
+            <table class="table table-stdiped">
+                <thead>
+                    <tr>
+                        <th scope="col">Route</th>
+                        <th scope="col">Méthode</th>
+                        <th scope="col">Résumé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/</td>
+                        <td>GET</td>
+                        <td>La page d’accueil.</td>
+                    </tr>
+                    <tr>
+                        <td>/help</td>
+                        <td>GET</td>
+                        <td>Affiche la page contenant les informations d’aide.</td>
+                    </tr>
+                    <tr>
+                        <td>/rss22/resume/xml</td>
+                        <td>GET</td>
+                        <td>Affiche la liste des articles présents dans la base en format XML.</td>
+                    </tr>
+                    <tr>
+                        <td>/rss22/resume/xml/{guid}</td>
+                        <td>GET</td>
+                        <td>Affiche le contenu complet de l’article dont l’identifiant est {guid} en format XML.</td>
+                    </tr>
+                    <tr>
+                        <td>/rss22/resume/html</td>
+                        <td>GET</td>
+                        <td>Affiche la liste des articles stockés dans la base.</td>
+                    </tr>
+                    <tr>
+                        <td>/rss22/html/{guid}</td>
+                        <td>GET</td>
+                        <td>Affiche le contenu complet de l’article dont l’identifiant est {guid}.</td>
+                    </tr>
+                    <tr>
+                        <td>/rss22/insert</td>
+                        <td>POST</td>
+                        <td>Insertion des articles.</td>
+                    </tr>
+                    <tr>
+                        <td>/rss22/delete/{guid}</td>
+                        <td>DELETE</td>
+                        <td>Suppression de l’article dont l’identifiant est {guid}.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
