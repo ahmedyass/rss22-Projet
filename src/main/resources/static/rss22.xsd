@@ -1,42 +1,175 @@
-<?xml version="1.0" encoding="utf-8"?>
-<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="feed" type="FeedType"/>    
-    <xs:complexType name="FeedType">
-        <xs:sequence>
-              <xs:element name="title" type="xs:string" minOccurs="1" maxOccurs="1"/>
-              <xs:element name="pubDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
-              <xs:element name="copyright" type="xs:string" minOccurs="1" maxOccurs="1"/>
-              <xs:element name="link" type="Link" minOccurs="1" maxOccurs="unbounded" />
-              <xs:element name="items" type="ItemsType" minOccurs="1" maxOccurs="10"/>
-        </xs:sequence>
-        <xs:attribute name="lang" type="xs:string " use="required"/>
-     </xs:complexType>
-  <xs:complexType name="ItemsType"><xs:sequence>
-        <xs:element name="item" type="ItemType"/></xs:sequence></xs:complexType >
-    <xs:complexType name="ItemType">
-      <xs:sequence>
-        <xs:element name="guid" type="xs:string" />
-        <xs:element name="title" type="xs:string" />
-        <xs:element name="published" type="xs:dateTime"  minOccurs="0" maxOccurs="1"/>
-        <xs:element name="category" type="xs:string"  minOccurs="0" maxOccurs="1"/>
-        <xs:element name="content" type="xs:string"  minOccurs="0" maxOccurs="1"/>
-        <xs:element name="authors" type="AuthorsType"  minOccurs="0" maxOccurs="1"/>
-      </xs:sequence>
-    </xs:complexType>
-  <xs:complexType name="AuthorsType">
-            <xs:sequence><xs:element name="author" type="AuthorType" minOccurs="1" maxOccurs="unbounded"/> </xs:sequence>
+<?xml version="1.0" encoding="UTF-8" ?>
 
-  </xs:complexType>
-   <xs:complexType name="Link" >
-              <xs:attribute name="rel" type="xs:string" use="required"/>
-              <xs:attribute name="type" type="xs:string" use="required"/>
-              <xs:attribute name="href" type="xs:string" use="required"/>
+<xs:schema 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              elementFormDefault="qualified" >
+
+    <!-- title -->
+    <xs:element name="title">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="128"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- title -->
+
+    <!-- pubDate -->
+    <xs:element name="pubDate" type="xs:date"/>
+    <!-- pubDate -->
+
+    <!-- copyright -->
+    <xs:element name="copyright">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="128"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- copyright -->
+
+    <!-- link -->
+    <xs:attribute name="rel">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="self"/>
+                <xs:enumeration value="alternate"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+
+    <xs:attribute name="type">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+
+    <xs:element name="link">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:anyURI">
+                    <xs:attribute ref="rel" />
+                    <xs:attribute ref="type" />
+                    <xs:attribute name="url" type="xs:string" />
+                </xs:extension>
+            </xs:simpleContent>
         </xs:complexType>
-  <xs:complexType name="AuthorType">
-   <xs:sequence>
-           <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
-           <xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="1"/>
-           <xs:element name="uti" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
-   </xs:sequence>
-  </xs:complexType>
+    </xs:element>
+    <!-- link -->
+
+    <!-- guid -->
+    <xs:element name="guid" type="xs:integer"/>
+    <!-- guid -->
+
+    <!-- category -->
+    <xs:element name="category">
+        <xs:complexType>
+            <xs:attribute name="term" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+    <!-- category -->
+
+    <!-- published | updated -->
+    <xs:element name="published" type="xs:date"/>
+    <xs:element name="updated" type="xs:date"/>
+    <!-- published | updated -->
+
+    <!-- content -->
+    <xs:element name="content">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="type" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="text"/>
+                                <xs:enumeration value="src"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="href" type="xs:anyURI"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <!-- content -->
+
+    <!-- author | contributor -->
+    <xs:element name="author" type="xs:string"/>
+    <xs:element name="contributor" type="xs:string"/>
+    <!-- author | contributor -->
+
+    <!-- name -->
+    <xs:element name="name">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- name -->
+
+    <!-- email -->
+    <xs:element name="email" type="emailAddress"/>
+    <xs:simpleType name="emailAddress">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- email -->
+
+    <!-- uri -->
+    <xs:element name="uri">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:anyURI" />
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <!-- uri -->
+
+    <!-- item -->
+    <xs:element name="item">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref ="guid" minOccurs="1" maxOccurs="1" />
+                <xs:element ref ="title" minOccurs="1" maxOccurs="1" />
+                <xs:element ref ="category" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref ="published" minOccurs="1" maxOccurs="1" />
+                <xs:element ref ="updated" minOccurs="1" maxOccurs="1" />
+                <xs:element ref ="content" minOccurs="1" maxOccurs="1" />
+                <xs:element ref ="author" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref ="contributor" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref ="name" minOccurs="1" maxOccurs="1" />
+                <xs:element ref ="email" minOccurs="0" maxOccurs="1" />
+                <xs:element ref ="uri" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- item -->
+
+    <!-- langue -->
+    <xs:attribute name="lang">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:pattern value="[a-z]{2}-([A-Z]{2}|[0-9]{3})"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <!-- langue -->
+
+    <!-- feed -->
+    <xs:element name="feed" type="typeFeed" />
+    <xs:complexType name="typeFeed">
+        <xs:sequence>
+            <xs:element ref ="title" minOccurs="1" maxOccurs="1" />
+            <xs:element ref ="pubDate" minOccurs="1" maxOccurs="1" />
+            <xs:element ref ="copyright" minOccurs="1" maxOccurs="1" />
+            <xs:element ref ="link" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element ref ="item" minOccurs="1" maxOccurs="10"/>
+        </xs:sequence>
+        <xs:attribute ref="lang" />
+    </xs:complexType>
+    <!-- feed -->
+
 </xs:schema>

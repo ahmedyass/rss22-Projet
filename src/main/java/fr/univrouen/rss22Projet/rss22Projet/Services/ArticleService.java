@@ -2,6 +2,7 @@ package fr.univrouen.rss22Projet.rss22Projet.Services;
 
 import fr.univrouen.rss22Projet.rss22Projet.Models.Article;
 
+import javax.xml.bind.JAXBException;
 import java.util.List;
 
 public interface ArticleService {
@@ -11,4 +12,5 @@ public interface ArticleService {
     void save(Article article);
     void saveMultiple(List<Article> articles);
     void deleteById(long guid);
+    List<Article> convertXML(String xml) throws JAXBException;
 }

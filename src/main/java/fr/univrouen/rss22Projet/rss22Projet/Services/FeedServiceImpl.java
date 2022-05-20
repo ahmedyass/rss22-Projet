@@ -34,7 +34,7 @@ public class FeedServiceImpl implements FeedService {
             validator.validate(new StreamSource(reader));
             return true;
         } catch (IOException | SAXException e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("XML Validation Exception: " + e.getMessage());
             return false;
         }
     }
@@ -47,7 +47,7 @@ public class FeedServiceImpl implements FeedService {
             Feed feed = (Feed) unmarshaller.unmarshal(new StringReader(xml));
             return feed;
         } catch (JAXBException e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("XML Conversion Exception: " + e.getMessage());
             return null;
         }
     }

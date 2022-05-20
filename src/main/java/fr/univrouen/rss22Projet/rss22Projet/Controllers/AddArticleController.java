@@ -38,16 +38,24 @@ public class AddArticleController {
         String feedInput = feed.getFeed();
         if( feedService.validateXMLSchema(feedInput) == true) {
             Feed _feed = feedService.convertXML(feedInput);
+            //List<Article> _articles = articleService.convertXML(feedInput);
             if(_feed == null) {
                 return "redirect:/rss22/resume/html?message=Le+feed+est+vide";
             } else {
                 feedService.save(_feed);
+                System.out.println("\n\n\n\n");
+                System.out.println("###################################");
+                System.out.println("\n");
+                //System.out.println(_articles);
+                System.out.println("\n");
+                System.out.println("###################################");
+                System.out.println("\n\n\n\n");
+                //List<Article> articles = new ArrayList<>(_feed.getItems());
+                //List<Article> articles = new ArrayList<>(feedService.convertXML(feedInput).getItems());
+                //articles.forEach(article -> article.setFeed(_feed));
+                //articleService.saveMultiple(articles);
 
-                List<Article> articles = new ArrayList<>(feedService.convertXML(feedInput).getItems());
-                articles.forEach(article -> article.setFeed(_feed));
-                articleService.saveMultiple(articles);
-
-                articles.forEach( article -> {
+                /*articles.forEach( article -> {
                     Set<Auteur> authors = article.getAutors();
                     authors.forEach( auteur -> {
                         if (auteurService.findAuteur(auteur.getId()) == null) {
@@ -56,10 +64,10 @@ public class AddArticleController {
                     });
                     article.setAutors(authors);
                     articleService.save(article);
-                });
-                return "redirect:/rss22/resume/html?message=Les+articles+sont+bien+ajoutés";
+                });*/
+                return "redirect:/rss22/resume/html?message=Les+articles+sont+bien+ajoutes";
             }
         }
-        return "redirect:/rss22/resume/html?message=Le+schéma+XML+n'est+pas+valide";
+        return "redirect:/rss22/resume/html?message=Le+schema+XML+n'est+pas+valide";
     }
 }

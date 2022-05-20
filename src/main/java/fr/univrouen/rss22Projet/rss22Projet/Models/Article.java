@@ -3,10 +3,11 @@ package fr.univrouen.rss22Projet.rss22Projet.Models;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @XmlRootElement(name = "item")
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Article")
 @Table(name = "article")
 public class Article implements Serializable {
@@ -28,13 +29,13 @@ public class Article implements Serializable {
     private String category;
 
     @XmlElement
-    @Column
+    @Column(columnDefinition = "text")
     private String content;
 
     @XmlElementWrapper(name = "authors")
     @XmlElement(name = "author")
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Auteur> autors;
+    private List<Auteur> autors;
 
     @ManyToOne
     @JoinColumn(name = "feed_id")
@@ -43,7 +44,7 @@ public class Article implements Serializable {
     public Article() {
     }
 
-    public Article(long guid, String title, String published, String category, String content, Set<Auteur> autors, Feed feed) {
+    public Article(long guid, String title, String published, String category, String content, List<Auteur> autors, Feed feed) {
         this.guid = guid;
         this.title = title;
         this.published = published;
@@ -93,11 +94,11 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    public Set<Auteur> getAutors() {
+    public List<Auteur> getAutors() {
         return autors;
     }
 
-    public void setAutors(Set<Auteur> autors) {
+    public void setAutors(List<Auteur> autors) {
         this.autors = autors;
     }
 

@@ -18,6 +18,6 @@ public class DeleteArticleController {
     @RequestMapping(value="/rss22/delete/{guid}", produces = MediaType.APPLICATION_XML_VALUE)
     public String deleteArticle(@PathVariable("guid") Long guid, Model model) {
         articleService.deleteById(guid);
-        return "redirect:/rss22/resume/html?message=L'article+"+guid+"+a+bien+été+supprimé";
+        return "redirect:/rss22/resume/html?message=L'article+"+guid+"+a+bien+ete+supprime";
     }
 }

@@ -25,8 +25,9 @@ public class ArticlesListXmlController {
         return articles;
     }
 
-    @GetMapping(value="/rss22/xml/{guid}", produces = MediaType.APPLICATION_XML_VALUE)
-    public Article getArticleXML(@PathVariable("guid") Long guid, Model model) {
+    @GetMapping(value = "/rss22/xml/{guid}", produces = MediaType.APPLICATION_XML_VALUE)
+    public @ResponseBody
+    Article getArticleXML(@PathVariable("guid") Long guid, Model model) {
         Article article = articleService.findById(guid);
         return article;
     }

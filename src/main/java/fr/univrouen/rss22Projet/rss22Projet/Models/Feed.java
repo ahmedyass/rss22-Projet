@@ -3,10 +3,11 @@ package fr.univrouen.rss22Projet.rss22Projet.Models;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @XmlRootElement(name = "feed")
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity(name = "Feed")
 @Table(name = "feed")
 public class Feed implements Serializable {
@@ -35,12 +36,12 @@ public class Feed implements Serializable {
     @XmlElementWrapper(name = "items")
     @XmlElement(name = "item")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Article> items;
+    private List<Article> items;
 
     public Feed() {
     }
 
-    public Feed(long id, String title, String pubDate, String copyright, String link, Set<Article> items) {
+    public Feed(long id, String title, String pubDate, String copyright, String link, List<Article> items) {
         this.id = id;
         this.title = title;
         this.pubDate = pubDate;
@@ -89,11 +90,11 @@ public class Feed implements Serializable {
         this.link = link;
     }
 
-    public Set<Article> getItems() {
+    public List<Article> getItems() {
         return items;
     }
 
-    public void setItems(Set<Article> items) {
+    public void setItems(List<Article> items) {
         this.items = items;
     }
 }
